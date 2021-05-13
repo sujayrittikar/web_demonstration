@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery Operations</title>
+<style>
+    body{
+        display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+    }
+
+    button{
+        padding-top: 10px;
+        margin-top: 10px;
+    }
+</style>
+
+</head>
+<body>
+    <h2>This is demonstration of using JQuery to change a value, so we use a Countdown Timer</h2>
+    <div class="minutes">
+        <h3>Enter number of minutes to start time countdown: </h3>
+        <input type="number" name="minutes" id="minutes" onchange="do_(this);" />
+    </div>
+
+    <form action="jquery.php" method="post">
+        <input type="text" name="back" value="back" id="back" hidden>
+        <button type="submit">Go Back</button>
+    </form>
+    <form action="jquery.php" method="post">
+        <input type="text" name="logout" value="logout" id="logout" hidden>
+        <button type="submit">Logout</button>
+    </form>
+    <!-- Scripts  -->
+    <script>
+        function do_(obj){
+var timer2 = obj.value + ':' + '01';
+var interval = setInterval(function() {
+
+
+  var timer = timer2.split(':');
+  var minutes = parseInt(timer[0], 10);
+  var seconds = parseInt(timer[1], 10);
+  --seconds;
+  minutes = (seconds < 0) ? --minutes : minutes;
+  if (minutes < 0) clearInterval(interval);
+  seconds = (seconds < 0) ? 59 : seconds;
+  seconds = (seconds < 10) ? '0' + seconds : seconds;
+  $('.countdown').html(minutes + ':' + seconds);
+  timer2 = minutes + ':' + seconds;
+}, 1000);
+        }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div class="countdown"></div>
+
+</body>
+</html>

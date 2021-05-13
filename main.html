@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Changer</title>
+    <style>
+        .text_color{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .coltext{
+            padding-top: 100px;
+        }
+
+        .txt_color{
+            padding-top: 20px;
+        }
+
+
+        .bg_color{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+        }
+
+        h2{
+            text-align: center;
+            padding-top: 80px;
+        }
+        .logout{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;   
+        }
+
+        input{
+            padding-top: 10px;
+        }
+
+        button{
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Change your Color!</h2>
+    <div class="text_color">
+        <div class="coltext">
+            <label for="coltext">Enter the Text to be colored: </label>
+            <span id="coltext"><input type="text" name="text" id="text" style="resize: none;"></span>
+        </div>
+        <br>
+        <div class="txt_color">
+            <label for="text_color">Enter your Color for changing the Text and press enter: (Either Text or value)</label>
+            <input id="color" type="text" onchange="changeText(this);" />
+    
+        </div>
+    </div>
+    <div class="bg_color">
+        <label for="bg_color">Enter your Color for changing the Background and press enter: (Either Text or value)</label>
+        <input id="bgcolor" type="text" onchange="changeBackground(this);" style="margin-top: 10px;"/>
+    </div>
+    <div class="logout">
+    <form action="login.php" method="post">
+        <input type="submit" name="logout" value="logout" />
+    </form>
+
+    <button onclick="disco()">Play some Disco!</button>
+    <form action="jquery.php" method="post">
+        <input type="text" name="jquery" id="jquery" value="jquery" hidden>
+        <button type="submit" style="margin-top: 20px;">Try JQuery functions</button>
+    </form>
+    </div>
+    <script>
+        function changeText(obj) {
+            document.getElementById("text").style.color = obj.value;
+        }
+
+        function changeBackground(obj) {
+            if(st)
+                clearTimeout(st);
+            
+            document.body.style.background = obj.value;
+          }
+
+            //you can assign the initial color of the background here
+            r=255;
+            g=255;
+            b=255;
+            flag=0;
+            t=new Array;
+            o=new Array;
+            d=new Array;
+            
+            function hex(a,c)
+            {
+            t[a]=Math.floor(c/16)
+            o[a]=c%16
+            switch (t[a])
+            {
+            case 10:
+            t[a]='A';
+            break;
+            case 11:
+            t[a]='B';
+            break;
+            case 12:
+            t[a]='C';
+            break;
+            case 13:
+            t[a]='D';
+            break;
+            case 14:
+            t[a]='E';
+            break;
+            case 15:
+            t[a]='F';
+            break;
+            default:
+            break;
+            }
+            switch (o[a])
+            {
+            case 10:
+            o[a]='A';
+            break;
+            case 11:
+            o[a]='B';
+            break;
+            case 12:
+            o[a]='C';
+            break;
+            case 13:
+            o[a]='D';
+            break;
+            case 14:
+            o[a]='E';
+            break;
+            case 15:
+            o[a]='F';
+            break;
+            default:
+            break;
+            }
+            }
+            
+            function ran(a,c)
+            {
+            if ((Math.random()>2/3||c==0)&&c<255)
+            {
+            c++
+            d[a]=2;
+            }
+            else
+            {
+            if ((Math.random()<=1/2||c==255)&&c>0)
+            {
+                c--
+                d[a]=1;
+            }
+            else d[a]=0;
+            }
+                return c
+            }
+            function do_it(a,c)
+            {
+            if ((d[a]==2&&c<255)||c==0)
+            {
+                c++
+                d[a]=2
+            }
+            else
+            if ((d[a]==1&&c>0)||c==255)
+            {
+                c--;
+                d[a]=1;
+            }
+            
+            if (a==3)
+            {
+                if (d[1]==0&&d[2]==0&&d[3]==0)
+                    flag=1
+            }
+                return c
+            }
+            function disco()
+            {
+            if (flag==0)
+            {
+                    r=ran(1, r);
+                    g=ran(2, g);
+                    b=ran(3, b);
+                    hex(1,r)
+                    hex(2,g)
+                    hex(3,b)
+                    document.body.style.background="#"+t[1]+o[1]+t[2]+o[2]+t[3]+o[3]
+                    flag=50
+            }
+            else
+            {
+                    r=do_it(1, r)
+                    g=do_it(2,g)
+                    b=do_it(3,b)
+                    hex(1,r)
+                    hex(2,g)
+                    hex(3,b)
+                    document.body.style.background="#"+t[1]+o[1]+t[2]+o[2]+t[3]+o[3]
+                    flag--
+            }
+            
+            st = setTimeout('disco()',1)
+            }
+
+
+    </script>
+
+</body>
+</html>
